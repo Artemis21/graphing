@@ -98,8 +98,8 @@ class Axis:
             )[1]
             for position in self.ticks
         )
-        length = max(self.ticks)
-        depth = (
+        length = math.ceil(max(self.ticks))
+        depth = math.ceil(
             self.tick_padding
             + self.tick_length
             + self.tick_width
