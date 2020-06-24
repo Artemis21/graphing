@@ -52,13 +52,15 @@ class Axis:
         )
 
     @classmethod
-    def text(cls, labels, *args, gap=20, **kwargs):
+    def text(cls, labels, *args, gap=20, center=False, **kwargs):
         """Constructor for evenly placed textual labels."""
         ticks = {}
-        pos = 0
+        pos = gap // 2 if center else 0
         for label in labels:
             ticks[pos] = label
             pos += gap
+        if center:
+            ticks[pos - gap // 2] = ''
         return cls(ticks, *args, **kwargs)
 
     def __init__(

@@ -1,4 +1,6 @@
 """The main plot on a graph."""
+import math
+
 from PIL import Image, ImageDraw
 
 
@@ -21,11 +23,11 @@ class LinePlot(Plot):
         """Create a line graph."""
         x_offset = padding_left - min(points) * x_scale
         y_offset = padding_bottom - min(points.values()) * y_scale
-        self.width = (
+        self.width = math.ceil(
             (max(points) - min(points)) * x_scale
             + padding_right + padding_left
         )
-        self.height = (
+        self.height = math.ceil(
             (max(points.values()) - min(points.values())) * y_scale
              + padding_top + padding_bottom
         )
@@ -56,8 +58,8 @@ class BarPlot(Plot):
             colour=(0, 0, 255, 255), scale=20
             ):
         """Create a bar graph."""
-        self.width = (bar_padding * 2 + bar_width) * len(values)
-        self.height = scale * max(values) + padding_top
+        self.width = math.ceil((bar_padding * 2 + bar_width) * len(values))
+        self.height = math.ceil(scale * max(values) + padding_top)
         image = Image.new(
             'RGBA', (self.width + 1, self.height + 1), color=(0, 0, 0, 0)
         )
